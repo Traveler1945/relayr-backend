@@ -1,4 +1,4 @@
-// Developed by Traveler 1945
+// Developed by Traveler1945
 
 import { initTRPC } from "@trpc/server";
 

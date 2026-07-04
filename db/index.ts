@@ -1,4 +1,4 @@
-// Developed by Traveler 1945
+// Developed by Traveler1945
 
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
@@ -11,7 +11,7 @@ if (!connectionString) {
   throw new Error("DATABASE_URL environment variable is required");
 }
 
-const client = postgres(connectionString);
+const client = postgres(connectionString, { ssl: "require" });
 
 export const db = drizzle(client, { schema });
 export type Db = typeof db;

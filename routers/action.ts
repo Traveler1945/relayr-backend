@@ -1,10 +1,11 @@
-// Developed by Traveler 1945
+// Developed by Traveler1945
 
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "../db";
 import { actions } from "../db/schema";
+import { firePaidAction } from "../lib/firePaidAction";
 import { publicProcedure, router } from "../lib/trpc";
 
 export const actionRouter = router({
@@ -26,5 +27,16 @@ export const actionRouter = router({
       }
 
       return db.select().from(actions).orderBy(actions.name);
+    }),
+
+  fire: publicProcedure
+    .input(
+      z.object({
+        operatorId: z.string().uuid(),
+        actionId: z.string().uuid(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      return firePaidAction(input);
     }),
 });
